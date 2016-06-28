@@ -10,7 +10,7 @@ body {
   }
 
 a {
-  color: rgb(144, 144, 144);
+  color: rgb(100, 100, 100);
   text-decoration: none; }
   a:hover {
     text-decoration: underline; }
@@ -59,7 +59,7 @@ a {
 
 @media screen and (min-width: 64em) {
   .homepage-header {
-    padding: 12rem 6rem; } }
+    padding: 10rem 6rem; } }
 
 @media screen and (min-width: 42em) and (max-width: 64em) {
   .homepage-header {
@@ -239,7 +239,8 @@ a {
 .site-footer {
   padding-top: 2rem;
   margin-top: 2rem;
-  border-top: solid 1px #eff0f1; }
+  border-top: solid 1px #eff0f1;
+  text-align: center;}
 
 .site-footer-owner {
   display: block;
