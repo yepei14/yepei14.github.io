@@ -59,15 +59,15 @@ a {
 
 @media screen and (min-width: 64em) {
   .homepage-header {
-    padding: 5rem 6rem; } }
+    padding: 12rem 6rem; } }
 
 @media screen and (min-width: 42em) and (max-width: 64em) {
   .homepage-header {
-    padding: 3rem 4rem; } }
+    padding: 6rem 4rem; } }
 
 @media screen and (max-width: 42em) {
   .homepage-header {
-    padding: 2rem 1rem; } }
+    padding: 3rem 1rem; } }
 
 .page-header {
   color: #fff;
