@@ -1,0 +1,91 @@
+<html>
+<head>
+	<title>弹层</title>
+	<meta charset="utf-8">
+	<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+	<style type="text/css">
+		#background{
+			display: none; 
+			position: absolute;  
+			top: 0%;  
+			left: 0%;  
+			width: 100%;  
+			height: 100%;  
+			background-color: black;
+			opacity:.80;
+			z-index: 0;
+		} 
+		#front{
+			display: none;  
+			position: absolute; 
+			top: 25%; 
+			left: 25%; 
+			width: 50%; 
+			height: 50%; 
+			padding: 16px; 
+			background-color: white; 
+			z-index: 1;
+		}  
+	</style>
+</head>
+<body>
+	<input type="button" value="弹出弹层" onclick="openWindow()"/></p>
+</body>
+<div id="front">这是一个弹层，默认按esc退出</div>
+<div id="background"></div>
+
+<script language="javascript">
+	//显示窗口
+	function openWindow(){
+		document.getElementById('front').style.display='block';
+		document.getElementById('background').style.display='block';
+	}
+
+	//关闭窗口
+	function closeWindow(){
+		document.getElementById('front').style.display='none';
+		document.getElementById('background').style.display='none';
+	}
+
+	//默认按ESC退出窗口
+	var closeKey = 27;
+	document.onkeydown = function(e){
+		if (e.keyCode == closeKey){
+			closeWindow();
+		}
+	};
+
+  	//设置拖拽函数，默认可拖拽
+  	var dragEnable = true;
+  	//获取元素和初始值
+	var item = document.getElementById("front"), disX = 0, disY = 0;
+  	//容器鼠标按下事件
+  	item.onmousedown = function (e){
+  		if (dragEnable){
+  			disX = e.clientX - this.offsetLeft;
+  			disY = e.clientY - this.offsetTop;
+  			document.onmousemove = function(e){
+  				item.style.left = (e.clientX - disX) + 'px';
+  				item.style.top = (e.clientY - disY) + 'px';
+  			};
+  			document.onmouseup = function (){
+  				document.onmousemove = null;
+  				document.onmouseup = null;
+  			};
+  		}
+  	};
+
+	//初始化各项参数的init函数
+	item['init'] = function (obj){
+		if (obj.content != undefined){
+			this.innerHTML = obj.content;
+		}
+		else if (obj.draggable != undefined){
+			dragEnable = obj.draggable;
+		}
+		else{
+			closeKey = obj.closeKey;
+		}
+	}
+</script>
+</html>

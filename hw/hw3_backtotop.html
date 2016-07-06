@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>backtotop</title>
+	<meta charset="utf-8">
+</head>
+<body>
+	<p class="tag">这是在测试回到顶部的按钮</p>
+	<p class="tag">这是在测试回到顶部的按钮</p>
+	<p class="tag">这是在测试回到顶部的按钮</p>
+	<p class="tag">这是在测试回到顶部的按钮</p>
+	<p class="tag">这是在测试回到顶部的按钮</p>
+	<p class="tag">这是在测试回到顶部的按钮</p>
+	<p class="tag">这是在测试回到顶部的按钮</p>
+	<p class="tag">这是在测试回到顶部的按钮</p>
+	<p class="tag">这是在测试回到顶部的按钮</p>
+	<p class="tag">这是在测试回到顶部的按钮</p>
+	<p class="tag">这是在测试回到顶部的按钮</p>
+	<p class="tag">这是在测试回到顶部的按钮</p>
+	<p class="tag">这是在测试回到顶部的按钮</p>
+	<p class="tag">这是在测试回到顶部的按钮</p>
+	<p class="tag">这是在测试回到顶部的按钮</p>
+	<p class="tag">这是在测试回到顶部的按钮</p>
+	<p class="tag">这是在测试回到顶部的按钮</p>
+	<p class="tag">这是在测试回到顶部的按钮</p>
+	<p class="tag">这是在测试回到顶部的按钮</p>
+	<p class="tag">这是在测试回到顶部的按钮</p>
+	<p class="tag">这是在测试回到顶部的按钮</p>
+	<p class="tag">这是在测试回到顶部的按钮</p>
+	<p class="tag">这是在测试回到顶部的按钮</p>
+	<p class="tag">这是在测试回到顶部的按钮</p>
+	<p class="tag">这是在测试回到顶部的按钮</p>
+	<p class="tag">这是在测试回到顶部的按钮</p>
+	<p class="tag">这是在测试回到顶部的按钮</p>
+	<p class="tag">这是在测试回到顶部的按钮</p>
+	<p class="tag">这是在测试回到顶部的按钮</p>
+	<p class="tag">这是在测试回到顶部的按钮</p>
+	<p class="tag">这是在测试回到顶部的按钮</p>
+	<p class="tag">这是在测试回到顶部的按钮</p>
+	<p class="tag">这是在测试回到顶部的按钮</p>
+	<p class="tag">这是在测试回到顶部的按钮</p>
+	<p class="tag">这是在测试回到顶部的按钮</p>
+	<p class="tag">这是在测试回到顶部的按钮</p>
+	<p class="tag">这是在测试回到顶部的按钮</p>
+	<p class="tag">这是在测试回到顶部的按钮</p>
+	<p class="tag">这是在测试回到顶部的按钮</p>
+	<p class="tag">这是在测试回到顶部的按钮</p>
+	<p class="tag">这是在测试回到顶部的按钮</p>
+	<p class="tag">这是在测试回到顶部的按钮</p>
+	<p class="tag">这是在测试回到顶部的按钮</p>
+	<p class="tag">这是在测试回到顶部的按钮</p>
+	<p class="tag">这是在测试回到顶部的按钮</p>
+	<p class="tag">这是在测试回到顶部的按钮</p>
+	<p class="tag">这是在测试回到顶部的按钮</p>
+	<p class="tag">这是在测试回到顶部的按钮</p>
+	<p class="tag">这是在测试回到顶部的按钮</p>
+	<p class="tag">这是在测试回到顶部的按钮</p>
+	<p class="tag">这是在测试回到顶部的按钮</p>
+	<p class="tag">这是在测试回到顶部的按钮</p>
+	<p class="tag">这是在测试回到顶部的按钮</p>
+	<p class="tag">这是在测试回到顶部的按钮</p>
+	<p class="tag">这是在测试回到顶部的按钮</p>
+	<p class="tag">这是在测试回到顶部的按钮</p>
+	<p class="tag">这是在测试回到顶部的按钮</p>
+	<p class="tag">这是在测试回到顶部的按钮</p>
+	<p class="tag">这是在测试回到顶部的按钮</p>
+	<p class="tag">这是在测试回到顶部的按钮</p>
+	<p class="tag">这是在测试回到顶部的按钮</p>
+	<p class="tag">这是在测试回到顶部的按钮</p>
+	<div id = "back_to_top" onclick="backToTop()"
+	style="display: none; position: fixed; cursor: pointer; right: 10px; bottom: 125px;"><img src="backtotop.png" height="75" width="75"></div>
+</body>
+<script type="text/javascript">
+	//用dom.scrollTop记录滚轮的位置
+	var dom = document.body;
+	
+	//回到顶部函数
+	var backToTop = function (){
+		clearInterval(this.interval);
+		this.interval = setInterval(function ()
+		{
+			var speed = -dom.scrollTop / 10;
+			if (!speed)
+			{
+				clearInterval(this.interval);
+				return null;
+			}
+			dom.scrollTop += speed;
+		}, 10);
+	};
+
+	//按w键回到顶部
+	document.onkeydown = function(e){
+		if (e.keyCode == 87){
+			backToTop();
+		}
+	};
+
+	//当滚动条不在顶部时显示图案
+	document.onscroll = function(){
+		if (dom.scrollTop > 0){
+			document.getElementById("back_to_top").style.display = "block";
+		}
+		else document.getElementById("back_to_top").style.display = "none";
+	};
+
+	//初始化图案出现位置的函数定义
+	var item = document.getElementById("back_to_top");
+	item["init"] = function (obj){
+		if (obj.LeftUp){
+			this.style.left = 25 + "px";
+			this.style.top = 25 + "px";
+		}
+		else if (obj.LeftDown){
+			this.style.left = 25 + "px";
+			this.style.bottom = 25 + "px";
+		}
+		else if (obj.RightUp){
+			this.style.right = 25 + "px";
+			this.style.top = 25 + "px";
+		}
+		else if (obj.RightDown){
+			this.style.right = 25 + "px";
+			this.style.bottom = 25 + "px";
+		}
+		else{
+			this.style.left = obj.x + "px";
+			this.style.top = obj.y + "px";
+		}
+	};
+
+	//修改此处改变图案出现位置
+	item.init({RightDown: true});
+</script>
+
+</html>
