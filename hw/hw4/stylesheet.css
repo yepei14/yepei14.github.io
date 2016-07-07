@@ -1,0 +1,69 @@
+#container {
+  position: absolute;
+  top: 0%;
+  left: 0%;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  color: white;
+  opacity:.8;
+  font-family: Helvetica, Arial, '黑体';
+}
+
+.messagebox {
+  top: 0%;
+  left: 0%;
+  width: 100%;
+  height: 30%;
+  padding: 0.2rem;
+  font-size: 5rem;
+}
+
+@media screen and (min-width: 90em) {
+  .messagebox {font-size: 7rem; }
+}
+
+@media screen and (max-width: 64em) {
+  .messagebox {
+    font-size: 4rem; }
+}
+
+.imgbox {
+  float: left;
+  top: 0%;
+  left: 0%;
+  height: 100%;
+  width: 14%;
+}
+
+.headimg {
+  top: 0%;
+  left: 0%;
+  height: 100%;
+  width: 100%;
+  border:2px solid;
+  border-radius:25px;
+}
+
+.nickname {
+  white-space: nowrap;
+  padding-left: 0.5rem;
+  color: #FFFF66;
+  position: relative;
+}
+
+.content {
+  padding-left: 0.5rem;
+  white-space: nowrap;
+  position: relative;
+}
+
+#footer {
+  position: relative;
+  font-size: 2rem;
+}
+
+@media screen and (max-width: 64em) {
+  #footer {
+    font-size: 1.5rem; }
+}
