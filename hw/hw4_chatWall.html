@@ -41,23 +41,24 @@
       left: 0%;
       height: 100%;
       width: 100%;
+      border:2px solid;
+      border-radius:25px;
     }
 
     .nickname {
       font-size: 3.8rem;
-      padding: 0.2rem;
+      padding-left: 0.5rem;
     }
     @media screen and (min-width: 90em) {
     .nickname {font-size: 5rem; }
     }
     @media screen and (max-width: 64em) {
     .nickname {
-      padding: 0rem;
       font-size: 2.5rem; }
     }
 
     .content {
-      padding: 0.2rem;
+      padding-left: 0.5rem;
       font-size: 3.8rem;
       white-space: nowrap;
       position: relative;
@@ -67,7 +68,6 @@
     }
     @media screen and (max-width: 64em) {
     .content {
-      padding: 0rem;
       font-size: 2.5rem; }
     }
   </style>
@@ -77,27 +77,27 @@
   <div id="container">
     <div class="messagebox">
       <div class="imgbox"><img class = "headimg" src=""></div>
-      <div style="">
+      <div style="overflow: hidden;">
         <div class = "nickname">123</div>
         <div class="content">content</div>
       </div>
     </div><div class="messagebox">
       <div class="imgbox"><img class = "headimg" src=""></div>
-      <div style="">
+      <div style="overflow: hidden;">
         <div class = "nickname">123</div>
         <div class="content">content</div>
       </div>
     </div>
     <div class="messagebox">
       <div class="imgbox"><img class = "headimg" src=""></div>
-      <div style="">
+      <div style="overflow: hidden;">
         <div class = "nickname">123</div>
         <div class="content">content</div>
       </div>
     </div>
     <div class="messagebox">
       <div class="imgbox"><img class = "headimg" src=""></div>
-      <div style="">
+      <div style="overflow: hidden;">
         <div class = "nickname">123</div>
         <div class="content">content</div>
       </div>
@@ -133,7 +133,7 @@
   socket.on('admin', function(json){
     flag = 1;
     count = count == 0 ? 1 : count;
-    headimg[0].setAttribute("src", "yepei.png");
+    headimg[0].setAttribute("src", "admin.png");
     nickname[0].innerHTML = json.nickname + ":";
     content[0].innerHTML = json.content;
     nickname[0].style.color = 'red';
