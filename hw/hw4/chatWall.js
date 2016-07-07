@@ -1,14 +1,22 @@
 // 需要用到的值的声明及初始化
-var socket= io('https://wall.cgcgbcbc.com/');
-var count = 0, // 记录当前可加入消息的box
+var socket= io('https://wall.cgcgbcbc.com/'),
+    count = 0, // 记录当前可加入消息的box
     flag = 0, // 记录当前是否有管理员消息，有为1，否则为0
+    loading = $(".loading"),
+    imgbox = $(".imgbox"),
     messagebox = $(".messagebox"),
-    headimg = $(".headimg"), nickname = $(".nickname"),
-    content = $(".content"), footer = $("#footer")[0];
-var speed = 10, pos = 0, contentPos = [0, 0, 0, 0],
-    nicknamePos = [0, 0, 0, 0];// 控制滚动
-var timer, adminTimer;// 计时器
-var xmlhttp = new XMLHttpRequest();// 创建XMLHttpRequest对象
+    headimg = $(".headimg"),
+    nickname = $(".nickname"),
+    content = $(".content"),
+    footer = $("#footer")[0],
+    speed = 10,
+    pos = 0,
+    contentPos = [0, 0, 0],
+    nicknamePos = [0, 0, 0],// 控制滚动
+    timer,// 用于文字滚动效果的计时器
+    adminTimer,// 用于管理员置顶效果的计时器
+    exitTimer = [0, 0, 0, 0],// 用于删除消息动画的计时器
+    xmlhttp = new XMLHttpRequest();// 创建XMLHttpRequest对象
 
 // 显示历史消息
 xmlhttp.onreadystatechange=function(){
@@ -27,25 +35,51 @@ xmlhttp.onreadystatechange=function(){
 xmlhttp.open("GET","https://wall.cgcgbcbc.com/api/messages",true);
 xmlhttp.send();
 
+// 图片加载完成，取消动画，显示头像
+headimg[0].onload = function () {
+  loading[0].style.display = "none";
+  imgbox[0].style.display = "block";
+};
+headimg[1].onload = function () {
+  loading[1].style.display = "none";
+  imgbox[1].style.display = "block";
+};
+headimg[2].onload = function () {
+  loading[2].style.display = "none";
+  imgbox[2].style.display = "block";
+};
+
 // 普通用户消息
 socket.on('new message',function(json){
-  headimg[count].setAttribute("src", json.headimgurl);// 加载用户头像
-  nickname[count].innerHTML = json.nickname + ":";// 加载用户昵称
-  content[count].innerHTML = json.content;// 加载消息内容
-  nickname[count].style.left = "0px";// 初始化昵称的位置
-  content[count].style.left = "0px";// 初始化内容的位置
-  if (flag){
-    count = count < messagebox.length ? ++count : 1;
-  }
-  else{
-    count = count < messagebox.length ? ++count : 0;
-  }
+  messagebox[count].style["animation"] = "exit 1s linear 2 alternate";// 消息消失效果
+  clearTimeout(exitTimer[count]);
+  clearTimeout(exitTimer[3]);
+  exitTimer[count] = setTimeout(function(){
+    loading[count].style.display = "block";// 显示加载中动画
+    imgbox[count].style.display = "none";// 显示加载中动画
+    headimg[count].setAttribute("src", json.headimgurl);// 加载用户头像
+    nickname[count].innerHTML = json.nickname + ":";// 加载用户昵称
+    content[count].innerHTML = json.content;// 加载消息内容
+    contentPos[count] = 0;
+    nicknamePos[count] = 0;
+    nickname[count].style.left = nicknamePos[count] + "px";// 初始化昵称的位置
+    content[count].style.left = contentPos[count] + "px";// 初始化内容的位置
+    if (flag){
+      count = count < (messagebox.length - 1) ? ++count : 1;
+    }
+    else{
+      count = count < (messagebox.length - 1) ? ++count : 0;
+    }
+  }, 1000);
+  exitTimer[3] = setTimeout("messagebox[count].style['animation'] = null", 2000);
 });
 
 // 管理员消息
 socket.on('admin', function(json){
   flag = 1;
   count = count == 0 ? 1 : count;
+  loading[0].style.display = "block";
+  imgbox[0].style.display = "none";
   headimg[0].setAttribute("src", "admin.png");
   nickname[0].innerHTML = json.nickname + ":";// 加载管理员昵称
   content[0].innerHTML = json.content;// 加载消息内容
