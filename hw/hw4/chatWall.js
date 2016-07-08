@@ -9,7 +9,8 @@ var socket= io('https://wall.cgcgbcbc.com/'),
     nickname = $(".nickname"),
     content = $(".content"),
     footer = $("#footer")[0],
-    speed = 10,
+    speed = 10,// 控制文字滚动速度，值越小滚动越快
+    newMessageInterval = 3000,// 控制检查是否有新消息的时间，默认3s检查一次新消息
     pos = 0,
     contentPos = [0, 0, 0],
     nicknamePos = [0, 0, 0],// 控制滚动
@@ -25,11 +26,8 @@ xmlhttp.onreadystatechange=function(){
   if (xmlhttp.readyState==4 && xmlhttp.status==200){
       var history = JSON.parse(xmlhttp.responseText);
       for (var i = 0; i < messagebox.length; i++){
-        headimg[i].setAttribute("src", history[i].headimgurl);// 加载用户头像
-        nickname[i].innerHTML = history[i].nickname + ":";// 加载用户昵称
-        content[i].innerHTML = history[i].content;// 加载消息内容
-        nickname[i].style.left = "0px";// 初始化昵称的位置
-        content[i].style.left = "0px";// 初始化内容的位置
+        messageArr.push(history[i]);
+        showNewMessage();
     }
   }
 }
@@ -85,7 +83,7 @@ socket.on('admin', function(json){
 
 // 显示新消息计时器
 clearInterval(messageTimer);
-messageTimer = setInterval(showNewMessage, 5000);
+messageTimer = setInterval(showNewMessage, newMessageInterval);
 
 // 显示新消息
 function showNewMessage(){
@@ -117,29 +115,17 @@ function showNewMessage(){
 
 // 滚动效果的计时器
 clearInterval(scrollTimer);
-scrollTimer = setInterval(MarqueeLeft,speed);
+scrollTimer = setInterval(MarqueeLeft, speed);
 
 // 底部公告滚动及消息过长时的滚动
 function MarqueeLeft(){
   // 底部公告滚动
-  if (footer.offsetWidth < footer.scrollWidth){
-    // 若公告长度大于显示屏宽度
-    if (pos + footer.scrollWidth > 0){
-      pos--;
-      footer.style.left = pos + "px";
-    }
-    else{
-      pos = 0;
-    }
+  if (pos + footer.scrollWidth > 0){
+    pos--;
+    footer.style.left = pos + "px";
   }
   else{
-    if (pos > 0){
-      pos--;
-      footer.style.left = pos + "px";
-    }
-    else{
-      setTimeout('pos = footer.scrollWidth', 1500);
-    }
+    pos = 0;
   }
   // 过长消息和名字滚动
   for (i in messagebox){
