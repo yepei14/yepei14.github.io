@@ -125,7 +125,7 @@ function MarqueeLeft(){
     footer.style.left = pos + "px";
   }
   else{
-    pos = 0;
+    pos = footer.offsetWidth;
   }
   // 过长消息和名字滚动
   for (i in messagebox){
