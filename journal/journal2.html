@@ -17,7 +17,7 @@
 
   <section class="main-content">
     <h2>关于Python pip install的编码问题</h2>
-    <p>今天pip install的时候出现了解码错误的问题：python3.4 UnicodeDecodeError: 'gbk' codec can't decode byte 0xff in position...</p>
+    <p>今天pip install的时候出现了解码错误的问题：UnicodeDecodeError: 'gbk' codec can't decode byte 0xff in position...</p>
     <p>网上大多数解决方案是Python2的，查了好久都没有查到适合我的解决方案。最后从官网上下了安装包，在安装包的源码里找到了出错的地方。一看……居然是读取readme的时候解码出现了问题……把那行删了之后手动安装，终于成功了。</p>
     <p>经验get，以后再出现此类问题可以考虑手动安装debug。</p>
     <a href="../journal.html">Back to Journal</a>
