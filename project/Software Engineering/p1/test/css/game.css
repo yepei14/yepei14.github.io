@@ -1,0 +1,27 @@
+/*地图行*/
+.grid-row{
+	float:left;
+	clear:both;	
+}
+
+/*死细胞样式*/
+.grid-cell-0{
+	width:5px;
+	height:5px;
+	background:black;
+	float:left;
+	margin: 0.5px;
+}
+
+/*活细胞样式*/
+.grid-cell-1{
+	width:5px;
+	height:5px;
+	background:white;
+	float:left;
+	margin: 0.5px;
+}
+
+.doudou-container{
+	position:relative;
+}
